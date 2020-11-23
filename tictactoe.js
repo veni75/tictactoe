@@ -1,7 +1,7 @@
 'use strict';
 
 const matrix = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-const mezo = document.querySelectorAll('td');
+const area = document.querySelectorAll('td');
 const message = document.querySelector('.message');
 const newGame = document.querySelector('.newGame');
 let clickNumber = 0;
@@ -9,7 +9,7 @@ let winner = [];
 
 newGame.addEventListener('click', function () {
     clickNumber = 0;
-    mezo.forEach(function (item, index) {
+    area.forEach(function (item, index) {
         item.textContent = "";
         matrix[index] = 0;
     })
@@ -17,23 +17,20 @@ newGame.addEventListener('click', function () {
 })
 
 function game() {
-    for (let i = 0; i < mezo.length; i += 1) {
-        mezo[i].addEventListener('click', function () {
-            if (mezo[i].textContent === '') {
-                if (clickNumber % 2 == 0) {
-                    mezo[i].textContent = "X";
+    clickNumber = 0;
+    for (let i = 0; i < area.length; i += 1) {
+        area[i].addEventListener('click', function () {
+            if (area[i].textContent === '') {
+                if (clickNumber % 2 === 0) {
+                    area[i].textContent = "X";
                     matrix[i] = "x";
-                    clickNumber += 1;
-                    if (clickNumber > 4) {
-                        check();
-                    }
                 } else {
-                    mezo[i].textContent = "O";
+                    area[i].textContent = "O";
                     matrix[i] = "o";
-                    clickNumber += 1;
-                    if (clickNumber > 4) {
-                        check();
-                    }
+                }
+                clickNumber += 1;                
+                if (clickNumber > 4) {
+                    check();
                 }
             }
         })
@@ -59,12 +56,13 @@ function check() {
         [matrix[2], matrix[4], matrix[6]],
     ]
 
-    winner.forEach(function (element) {
-        message.setAttribute('class', 'message displayBlock');
+    winner.forEach(function (element) {        
         if (element.every(item => item === 'x')) {
-            message.textContent = 'Az 1. játékos nyert.';            
+            message.textContent = 'Az 1. (X) játékos nyert.';
+            message.setAttribute('class', 'message displayBlock');
         } else if (element.every(item => item === 'o')) {
-            message.textContent = 'A 2. játékos nyert.';            
+            message.textContent = 'A 2. (O) játékos nyert.';
+            message.setAttribute('class', 'message displayBlock');
         }
     })
 }
