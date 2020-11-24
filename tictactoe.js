@@ -1,6 +1,6 @@
 'use strict';
 
-const matrix = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+const matrix = [0,0,0,0,0,0,0,0,0];
 const area = document.querySelectorAll('td');
 const message = document.querySelector('.message');
 const newGame = document.querySelector('.newGame');
@@ -16,7 +16,7 @@ newGame.addEventListener('click', function () {
     message.setAttribute('class', 'message displayNone');
 })
 
-function game() {
+const game = () => {
     clickNumber = 0;
     for (let i = 0; i < area.length; i += 1) {
         area[i].addEventListener('click', function () {
@@ -29,7 +29,7 @@ function game() {
                     matrix[i] = "o";
                 }
                 clickNumber += 1;                
-                if (clickNumber > 4) {
+                if(clickNumber > 4){
                     check();
                 }
             }
@@ -37,11 +37,11 @@ function game() {
     }
 }
 
-function finish() {
+const finish = () => {
     message.setAttribute('class', 'message displayBlock');
 }
 
-function check() {
+const check = () => {
     if (clickNumber === 9) {
         finish();
     }
